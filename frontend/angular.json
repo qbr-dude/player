@@ -12,7 +12,7 @@
       },
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "player",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -92,5 +92,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "ce03f33b-f138-4c20-a2c1-7e1f99310693"
   }
 }
