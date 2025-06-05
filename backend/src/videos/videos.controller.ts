@@ -3,6 +3,8 @@ import {Request, Response} from 'express';
 import {createReadStream, statSync} from 'node:fs';
 import {join} from 'node:path';
 
+const CHUNK_SIZE = 2 ** 20; // 1MB
+
 @Controller('videos')
 export class VideosController {
   constructor() {}
@@ -30,14 +32,13 @@ export class VideosController {
 
     const [startStr, endStr] = range.replace(/bytes=/, '').split('-');
     const start = parseInt(startStr, 10);
-    const end = endStr ? parseInt(endStr, 10) : fileSize - 1;
-    const chunkSize = end - start;
+    const end = endStr ? parseInt(endStr, 10) : start + CHUNK_SIZE - 1;
 
     const stream = createReadStream(path, {start, end});
     response.writeHead(206, {
       'Content-Range': `bytes ${start}-${end}/${fileSize}`,
       'Accept-Ranges': 'bytes',
-      'Content-Length': chunkSize,
+      'Content-Length': CHUNK_SIZE,
       'Content-Type': 'video/mp4',
     });
 
