@@ -2,17 +2,16 @@ import { isPlatformBrowser } from '@angular/common';
 import { Component, Inject, OnInit, PLATFORM_ID, signal } from '@angular/core';
 
 @Component({
-  selector: 'player-video',
+  selector: 'player-player',
   imports: [],
-  templateUrl: './video.html',
-  styleUrl: './video.scss'
+  templateUrl: './player.html',
+  styleUrl: './player.scss'
 })
-export class Video implements OnInit {
+export class Player {
   readonly source = signal('');
+  readonly type = signal('video/mp4');
 
-  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
-
-  ngOnInit(): void {
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {
     if(isPlatformBrowser(this.platformId)) {
       this.source.set(`${location.protocol}//${location.hostname}:3000/videos/test.mp4`);
     }

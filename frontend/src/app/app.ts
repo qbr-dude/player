@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Video } from "../widgets/video/video";
+import { Player } from "../widgets/player/player";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Video],
+  imports: [Player],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
